@@ -26,7 +26,16 @@ def generate_summary(email):
     st.write(response.choices[0].message.content)
 
 def generate_answer(email):
-    pass
+    response = client.chat.completions.create(
+        model=MODEL,
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": f"Generate an answer for this email:\n{email}"}
+        ],
+        temperature=0,
+    )
+
+    st.write(response.choices[0].message.content)
 
 
 # OpenAI connection
